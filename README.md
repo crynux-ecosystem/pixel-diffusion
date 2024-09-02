@@ -4,13 +4,13 @@ Train an extremely small diffusion model for tiny images (16x16)
 ## Train a model
 
 ```
-python3 train.py -data_path "data/Apple/*"   -save_path emoji.pt
+python3 train.py -data_path "data/Apple/*"   -save_path ckpt/emoji
 ```
 
 ## Sample
 
 ```
-python3 sample.py -model emoji.pt -num 100 -output out.png -noise_mul 10
+python3 sample.py -model ckpt/emoji -num 100 -output out.png -noise_mul 10
 ```
 
 

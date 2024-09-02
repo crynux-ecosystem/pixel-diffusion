@@ -55,7 +55,7 @@ def run():
     print("Loaded dataset of size", len(data))
     train_loader = data.dataloader(BATCH_SIZE)
 
-    model = diffusion.UNet().to("mps")
+    model = diffusion.UNet().to(DEVICE)
     epoch = 1
     if args.load_path != "":
         epoch = ckpt_utils.load_model(model, args.load_path, DEVICE)

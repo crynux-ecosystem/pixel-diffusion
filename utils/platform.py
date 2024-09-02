@@ -13,7 +13,7 @@ def get_accelerator():
     try:
         import torch.cuda
         if torch.cuda.is_available():
-            return torch.device("mps")
+            return torch.device("cuda")
     except ImportError:
         pass
 

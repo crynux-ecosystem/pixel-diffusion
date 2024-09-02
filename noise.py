@@ -1,8 +1,8 @@
 import torch
-from pixartdiffusion.parameters import STEPS
 from utils import platform
 
 DEVICE = platform.get_accelerator()
+STEPS = 500
 
 def beta(t):
     L = torch.tensor(0.001, dtype=torch.float)
@@ -26,7 +26,7 @@ def noise(xs, ts):
     assert ts.dtype == torch.long, "Times must have long datatype" # required for indexing
 
     device = platform.get_accelerator()
-    alpha = _ALPHA[ts]
+    alpha = ALPHA[ts]
     epsilon = torch.normal(torch.zeros_like(xs), 1).to(DEVICE)
 
     noised = torch.sqrt(alpha)[:,None,None,None] * xs + torch.sqrt(1 - alpha)[:,None,None,None] * epsilon
