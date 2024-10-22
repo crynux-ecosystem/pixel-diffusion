@@ -48,7 +48,17 @@ def sample(model, num, display_count = 4, noise_mul = 6):
         s = ACTUAL_STEPS // display_count if display_count != 0 else ACTUAL_STEPS*5
 
         for t in tqdm(range(ACTUAL_STEPS, 0, -1)):
-            h = sample_step(model, h, t, noise_mul)
+            if t == 1:
+                seed = torch.seed()
+                state = random.getstate()
+                verify = sample_step(model, h, t, noise_mul)
+
+                torch.manual_seed(seed)
+                random.setstate(state)
+                h = sample_step(model, h, t, noise_mul)
+                print(torch.sum(verify - h))
+            else:
+                h = sample_step(model, h, t, noise_mul)
         # -1..1 -> 0..1
         return (h+1)/2
 
